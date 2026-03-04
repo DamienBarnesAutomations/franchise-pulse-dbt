@@ -1,0 +1,17 @@
+services:
+  dbt:
+    build:
+      context: .
+      dockerfile: Dockerfile.dbt
+    container_name: franchise-pulse-dbt
+    volumes:
+      - .:/usr/app
+    environment:
+      - DBT_PROFILES_DIR=/usr/app
+    working_dir: /usr/app
+    stdin_open: true
+    tty: true
+    ports:
+      - "8081:8081"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

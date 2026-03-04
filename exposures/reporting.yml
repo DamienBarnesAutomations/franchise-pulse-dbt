@@ -1,0 +1,31 @@
+version: 2
+
+exposures:
+
+  - name: operations_dashboard
+    type: dashboard
+    maturity: medium
+    url: https://dashboard.damosdatasolutions.com
+    description: >
+      Daily store performance dashboard for operations team.
+      Shows transaction counts, revenue, and refund rates per store per day.
+      Refreshed daily after pipeline run completes.
+    depends_on:
+      - ref('rpt_daily_store')
+    owner:
+      name: Operations Team
+      email: ops@franchisepulse.ie
+
+  - name: finance_weekly_reporting
+    type: ml model
+    maturity: high
+    description: >
+      Weekly product mix and regional revenue reports for finance team.
+      Used for margin analysis, promotional planning, and regional
+      performance review. Distributed as Excel export every Monday.
+    depends_on:
+      - ref('rpt_weekly_product')
+      - ref('rpt_regional_summary')
+    owner:
+      name: Finance Team
+      email: finance@franchisepulse.ie

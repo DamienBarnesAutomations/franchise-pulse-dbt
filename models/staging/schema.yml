@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_sales
+    description: "Staging model for raw sales data. Filters to PASS rows and casts to proper types."
+    columns:
+      - name: transaction_id
+        description: "Unique transaction identifier"
+        tests:
+          - not_null
+          - unique
+      - name: store_id
+        tests:
+          - not_null
+      - name: transaction_date
+        tests:
+          - not_null
+      - name: product_sku
+        tests:
+          - not_null
+      - name: quantity
+        tests:
+          - not_null
+      - name: unit_price
+        tests:
+          - not_null
+      - name: payment_method
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Card', 'Cash', 'Contactless', 'Apple Pay', 'Google Pay']
+      - name: category
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Hot Drinks', 'Cold Drinks', 'Food', 'Merch']

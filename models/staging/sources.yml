@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: franchisepulse
+    database: FranchisePulse
+    schema: dbo
+    description: FranchisePulse SQL Server database
+    tables:
+      - name: stg_sales
+        description: Raw staged sales data loaded by Airflow ingestion pipeline
+        columns:
+          - name: validation_status
+            description: PASS rows are clean. FAIL rows are quarantined with rejection_reason.
+      - name: dim_store
+        description: Franchise location reference data. 12 active stores.
+      - name: dim_product
+        description: Product catalogue. 17 SKUs across 4 categories.
+      - name: dim_date
+        description: Calendar table covering 2024-01-01 to 2027-12-31.
+      - name: dim_payment_method
+        description: Payment method lookup. 5 methods.

@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: fct_sales
+    description: "Core incremental fact table for sales transactions."
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+      - name: store_key
+        tests:
+          - not_null
+          - relationships:
+              to: source('franchisepulse', 'dim_store')
+              field: store_key
+      - name: product_key
+        tests:
+          - not_null
+          - relationships:
+              to: source('franchisepulse', 'dim_product')
+              field: product_key
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              to: source('franchisepulse', 'dim_date')
+              field: date_key
+      - name: payment_key
+        tests:
+          - not_null
+          - relationships:
+              to: source('franchisepulse', 'dim_payment_method')
+              field: payment_key
+
+  - name: rpt_daily_store
+    description: "Daily store performance summary."
+    columns:
+      - name: net_revenue
+        tests:
+          - not_null
+      - name: total_transactions
+        tests:
+          - not_null
+
+  - name: rpt_weekly_product
+    description: "Weekly product sales analysis."
+    columns:
+      - name: net_revenue
+        tests:
+          - not_null
+      - name: total_quantity
+        tests:
+          - not_null
+
+  - name: rpt_regional_summary
+    description: "Regional revenue summary."
+    columns:
+      - name: net_revenue
+        tests:
+          - not_null
+      - name: store_count
+        tests:
+          - not_null
